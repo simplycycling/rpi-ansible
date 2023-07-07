@@ -1,0 +1,70 @@
+---
+- name: Add user to group, install Docker, Buildkite agent, and fonts
+  hosts: all
+  become: yes
+  become_method: sudo
+
+  tasks:
+    - name: Add user to sudo group
+      user:
+        name: rsherman
+        groups: sudo
+        append: yes
+
+    - name: Install prerequisites
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - gnupg
+          - software-properties-common
+        state: present
+
+    - name: Add Docker's GPG key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker APT repository
+      apt_repository:
+        repo: deb [arch={{ dpkg_architecture.stdout }}] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+        state: present
+
+    - name: Install Docker packages
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        state: present
+
+    - name: Add user to docker group
+      user:
+        name: rsherman
+        groups: docker
+        append: yes
+
+    - name: Install Buildkite agent
+      shell: |
+        su - rsherman -c "sudo docker run --rm \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        buildkite/agent:stable start"
+      become: no
+
+    - name: Download font files
+      get_url:
+        url: "{{ item }}"
+        dest: "/tmp/{{ item | basename }}"
+      loop:
+        - "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf"
+        - "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf"
+        - "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf"
+        - "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf"
+
+    - name: Install fonts
+      shell: |
+        cp /tmp/*.ttf /usr/share/fonts/
+        fc-cache -f -v
