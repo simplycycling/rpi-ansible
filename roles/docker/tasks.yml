@@ -28,3 +28,9 @@
       - docker-buildx-plugin
       - docker-compose-plugin
     state: present
+
+- name: Add user to docker group
+  user:
+    name: rsherman
+    groups: docker
+    append: yes
