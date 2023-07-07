@@ -1,4 +1,14 @@
 ---
+- name: Install prerequisites
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+      - software-properties-common
+    state: present
+
 - name: Add Docker's GPG key
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg

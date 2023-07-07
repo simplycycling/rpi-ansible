@@ -4,6 +4,11 @@
   become: yes
   become_method: sudo
 
+  roles:
+    - docker
+    - buildkite
+    - fonts
+
   tasks:
     - name: Add user to sudo group
       user:
