@@ -1,0 +1,11 @@
+---
+- name: Run Buildkite agent
+  docker_container:
+    name: buildkite-agent
+    image: buildkite/agent:stable
+    state: started
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    env:
+      BUILDKITE_AGENT_TOKEN: "{{ buildkite_agent_token }}"
+  become: no
