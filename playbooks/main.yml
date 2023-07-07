@@ -12,6 +12,6 @@
   tasks:
     - name: Add user to sudo group
       user:
-        name: rsherman
-        groups: sudo
+        name: "{{ user_name }}"
+        groups: "{{ sudo_group_name }}"
         append: yes

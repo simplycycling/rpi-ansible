@@ -1,12 +1,7 @@
 ---
 - name: Install prerequisites
   apt:
-    name:
-      - apt-transport-https
-      - ca-certificates
-      - curl
-      - gnupg
-      - software-properties-common
+    name: "{{ prerequisite_packages }}"
     state: present
 
 - name: Add Docker's GPG key
@@ -21,16 +16,11 @@
 
 - name: Install Docker packages
   apt:
-    name:
-      - docker-ce
-      - docker-ce-cli
-      - containerd.io
-      - docker-buildx-plugin
-      - docker-compose-plugin
+    name: "{{ docker_packages }}"
     state: present
 
 - name: Add user to docker group
   user:
-    name: rsherman
-    groups: docker
+    name: "{{ user_name }}"
+    groups: "{{ docker_group_name }}"
     append: yes

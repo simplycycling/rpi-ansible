@@ -1,3 +1,26 @@
+---
+# User and group names
+user_name: "rsherman"
+sudo_group_name: "sudo"
+docker_group_name: "docker"
+
+# Prerequisite packages
+prerequisite_packages:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg
+  - software-properties-common
+
+# Docker packages
+docker_packages:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - docker-buildx-plugin
+  - docker-compose-plugin
+
+# Buildkite agent token
 buildkite_agent_token: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           34636364353634303966353864646362363134356161313765643433303733393162393162346164
@@ -7,3 +30,10 @@ buildkite_agent_token: !vault |
           66663533303466333232343336656366316339626131636335653536636637373535376363393232
           35303439656166343038623165653961356130663265303066373238653763633734356433376161
           336539613835343735613561653432346138
+
+# Font URLs
+font_urls:
+  - "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf"
+  - "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf"
+  - "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf"
+  - "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf"
