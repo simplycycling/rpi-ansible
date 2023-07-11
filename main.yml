@@ -10,14 +10,6 @@
     - fonts
 
   tasks:
-    - name: ping nodes
-      ping:
-      register: ping_result
-
-    - debug:
-        var: ping_result
-
-
     - name: Add user to sudo group
       user:
         name: "{{ user_name }}"
