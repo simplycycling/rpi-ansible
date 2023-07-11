@@ -10,8 +10,11 @@
     - fonts
 
   tasks:
-    - name: Add user to sudo group
-      user:
-        name: "{{ user_name }}"
-        groups: "{{ sudo_group_name }}"
-        append: yes
+    - name: Change sudo group to passwordless
+      lineinfile:
+        path: /etc/sudoers
+        state: present
+        regexp: '^%sudo'
+        line: '%sudo ALL=(ALL) NOPASSWD: ALL'
+        validate: 'visudo -cf %s'
+
