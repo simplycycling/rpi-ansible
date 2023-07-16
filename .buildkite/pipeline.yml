@@ -1,8 +1,6 @@
 steps:
-  - command: "echo 'Hello World'"
-    label: "Hello World"
-    agents:
-      queue: "ansible-rpi"
+  - command: "buildkite-agent pipeline upload"
+
 #  - label: "Checkout Repository"
 #    command: "git clone https://github.com/simplycycling/rpi-ansible.git ." # Cloning the repository
 #    plugins:
