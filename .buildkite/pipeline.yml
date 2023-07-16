@@ -1,11 +1,11 @@
 steps:
   - label: "Checkout Repository"
+    commands:
+      - git clone https://github.com/simplycycling/rpi-ansible.git . # Cloning the repository
     plugins:
       - docker#v3.5.1:
           image: "alpine/git:v2.32.0" # Using Alpine Git image for repository checkout
           always-pull: true
-    commands:
-      - git clone https://github.com/simplycycling/rpi-ansible.git . # Cloning the repository
     agents:
       queue: "ansible-rpi"
 
