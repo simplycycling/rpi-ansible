@@ -1,0 +1,23 @@
+steps:
+  - label: "Checkout Repository"
+    plugins:
+      - docker#v3.5.1:
+          image: "alpine/git:v2.32.0" # Using Alpine Git image for repository checkout
+          always-pull: true
+    commands:
+      - git clone https://github.com/simplycycling/rpi-ansible.git . # Cloning the repository
+    agents:
+      queue: "your_buildkite_queue"
+
+  - label: "Test Ansible"
+    command: "docker run --rm -v $PWD:/ansible -w /ansible ansible ansible-playbook --syntax-check playbook.yml"
+    agents:
+      queue: "your_buildkite_queue"
+    timeout_in_minutes: 10
+
+  - label: "Run Ansible Playbook"
+    command: "docker run --rm -v $PWD:/ansible -w /ansible ansible ansible-playbook playbook.yml"
+    agents:
+      queue: "your_buildkite_queue"
+    depends_on: "Test Ansible"
+    timeout_in_minutes: 60
