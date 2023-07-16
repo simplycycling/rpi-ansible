@@ -1,6 +1,7 @@
 steps:
   - label: "Checkout Repository"
     commands:
+      - echo "Cloning repository..."
       - git clone https://github.com/simplycycling/rpi-ansible.git . # Cloning the repository
     plugins:
       - docker#v3.5.1:
