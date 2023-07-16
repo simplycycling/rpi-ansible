@@ -10,13 +10,13 @@ steps:
       queue: "ansible-rpi"
 
   - label: "Test Ansible"
-    command: "docker run --rm -v $PWD:/ansible -w /ansible ansible ansible-playbook --syntax-check playbook.yml"
+    command: "docker run --rm -v $PWD:/ansible -w /ansible ansible ansible-playbook --syntax-check main.yml"
     agents:
       queue: "ansible-rpi"
     timeout_in_minutes: 10
 
   - label: "Run Ansible Playbook"
-    command: "docker run --rm -v $PWD:/ansible -w /ansible ansible ansible-playbook playbook.yml"
+    command: "docker run --rm -v $PWD:/ansible -w /ansible ansible ansible-playbook main.yml"
     agents:
       queue: "ansible-rpi"
     depends_on: "Test Ansible"
