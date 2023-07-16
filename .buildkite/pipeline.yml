@@ -7,17 +7,17 @@ steps:
     commands:
       - git clone https://github.com/simplycycling/rpi-ansible.git . # Cloning the repository
     agents:
-      queue: "your_buildkite_queue"
+      queue: "ansible-rpi"
 
   - label: "Test Ansible"
     command: "docker run --rm -v $PWD:/ansible -w /ansible ansible ansible-playbook --syntax-check playbook.yml"
     agents:
-      queue: "your_buildkite_queue"
+      queue: "ansible-rpi"
     timeout_in_minutes: 10
 
   - label: "Run Ansible Playbook"
     command: "docker run --rm -v $PWD:/ansible -w /ansible ansible ansible-playbook playbook.yml"
     agents:
-      queue: "your_buildkite_queue"
+      queue: "ansible-rpi"
     depends_on: "Test Ansible"
     timeout_in_minutes: 60
