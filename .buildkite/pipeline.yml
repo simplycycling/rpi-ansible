@@ -1,12 +1,17 @@
 steps:
-  - label: "Checkout Repository"
-    command: git clone https://github.com/simplycycling/rpi-ansible.git . # Cloning the repository
-    plugins:
-      - docker#v3.5.1:
-          image: "alpine/git:v2.32.0" # Using Alpine Git image for repository checkout
-          always-pull: true
-    agents:
-      queue: "ansible-rpi"
+  - label: "Example Test"
+    command: echo "Hello!"
+
+
+#steps:
+#  - label: "Checkout Repository"
+#    command: git clone https://github.com/simplycycling/rpi-ansible.git . # Cloning the repository
+#    plugins:
+#      - docker#v3.5.1:
+#          image: "alpine/git:v2.32.0" # Using Alpine Git image for repository checkout
+#          always-pull: true
+#    agents:
+#      queue: "ansible-rpi"
 
 #  - label: "Test Ansible"
 #    command: "docker run --rm -v $PWD:/ansible -w /ansible ansible ansible-playbook --syntax-check main.yml"
