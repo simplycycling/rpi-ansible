@@ -4,8 +4,4 @@
     url: "{{ item }}"
     dest: "/tmp/{{ item | basename }}"
   loop: "{{ font_urls }}"
-
-- name: Install fonts
-  shell: |
-    cp /tmp/*.ttf /usr/share/fonts/
-    fc-cache -f -v
+  notify: Install fonts

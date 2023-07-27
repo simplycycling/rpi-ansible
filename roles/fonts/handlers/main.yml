@@ -1,0 +1,5 @@
+---
+- name: Install fonts
+  shell: |
+    cp /tmp/*.ttf /usr/share/fonts/
+    fc-cache -f -v
