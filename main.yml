@@ -5,15 +5,8 @@
   become_method: sudo
 
   roles:
+    - common
     - docker
     - buildkite
     - fonts
 
-  tasks:
-    - name: Change sudo group to passwordless
-      lineinfile:
-        path: /etc/sudoers
-        state: present
-        regexp: '^%sudo'
-        line: '%sudo ALL=(ALL) NOPASSWD: ALL'
-        validate: 'visudo -cf %s'
