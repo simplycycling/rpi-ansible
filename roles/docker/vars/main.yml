@@ -1,8 +1,3 @@
-# User and group names
-user_name: "rsherman"
-docker_group_name: "docker"
-#TODO Figure out why this needed to be added here
-
 # Prerequisite packages
 prerequisite_packages:
   - apt-transport-https
